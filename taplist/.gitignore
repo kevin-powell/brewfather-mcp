@@ -3,3 +3,6 @@ dist/
 .astro/
 .netlify/
 .env
+
+# The repo root .gitignore (Python template) ignores lib/; this one is source code
+!src/lib/
