@@ -1,0 +1,21 @@
+{
+  "lists": [
+    {
+      "id": "oatmeal-stout-2026-09",
+      "recipe": "Night Shift",
+      "style": "Oatmeal Stout",
+      "batchSize": "20 L",
+      "brewDay": "2026-09-27",
+      "createdAt": "2026-09-15",
+      "notes": "Grain bill is 5.6 kg total. Buying Maris Otter as a 5 kg bag covers this and the next brew.",
+      "items": [
+        { "category": "Grain", "name": "Maris Otter", "buy": "5 kg", "need": "4.2 kg", "have": "0.8 kg", "note": "comes in 5 kg bags" },
+        { "category": "Grain", "name": "Flaked Oats", "buy": "500 g", "need": "500 g", "have": "0 g" },
+        { "category": "Grain", "name": "Roasted Barley", "buy": "300 g", "need": "300 g", "have": "0 g" },
+        { "category": "Hops", "name": "East Kent Goldings", "buy": "50 g", "need": "40 g", "have": "0 g" },
+        { "category": "Yeast", "name": "Lallemand Nottingham", "buy": "1 pack", "need": "1 pack", "have": "0 packs" },
+        { "category": "Water & salts", "name": "Calcium chloride", "buy": "1 bag", "need": "4 g", "have": "0 g" }
+      ]
+    }
+  ]
+}

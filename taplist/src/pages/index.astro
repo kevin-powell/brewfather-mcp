@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../config";
+import { getTapList } from "../lib/brewfather";
+import TapSection from "../components/TapSection.astro";
+
+const { onTap, comingSoon, usingSample, updatedAt } = await getTapList();
+const updated = new Intl.DateTimeFormat("en-CA", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "America/Halifax",
+}).format(updatedAt);
+---
+
+<BaseLayout>
+  {usingSample && <p class="sample-notice">Sample data: add Brewfather credentials to <code>.env</code> to see your real taps.</p>}
+
+  <header class="site-header region">
+    <div class="wrapper flow">
+      <h1>{site.name}</h1>
+      <p>{site.tagline}</p>
+    </div>
+  </header>
+
+  <main class="wrapper">
+    <TapSection title="On tap" beers={onTap} empty="The taps are dry. Something's on the way." />
+    <TapSection title="Coming soon" beers={comingSoon} empty="Nothing conditioning right now." />
+  </main>
+
+  <footer class="site-footer region">
+    <div class="wrapper">
+      <p>Updated {updated}</p>
+    </div>
+  </footer>
+</BaseLayout>

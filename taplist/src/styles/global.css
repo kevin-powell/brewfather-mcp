@@ -1,0 +1,107 @@
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  body {
+    min-block-size: 100svh;
+    line-height: 1.5;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  ul[role="list"] {
+    list-style: none;
+    padding: 0;
+  }
+}
+
+@layer global {
+  :root {
+    color-scheme: light dark;
+
+    --color-bg: light-dark(#f7f1e6, #17120d);
+    --color-surface: light-dark(#fffaf1, #221a13);
+    --color-text: light-dark(#2a1f16, #f3e9da);
+    --color-text-muted: light-dark(#6b5a4a, #b8a690);
+    --color-accent: light-dark(#b25a0c, #f2a541);
+    --color-border: light-dark(#e3d5c0, #3a2d21);
+    --color-conditioning: light-dark(#8a4b0f, #f2a541);
+    --color-fermenting: light-dark(#3f6b1f, #a8d977);
+
+    --font-base: ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+
+    --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+    --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+    --step-2: clamp(1.56rem, 1.35rem + 1vw, 2.1rem);
+    --step-3: clamp(1.95rem, 1.5rem + 2.25vw, 3.25rem);
+
+    --space-2xs: 0.25rem;
+    --space-xs: 0.5rem;
+    --space-s: 1rem;
+    --space-m: 1.5rem;
+    --space-l: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    --space-xl: clamp(3rem, 2rem + 5vw, 5rem);
+
+    --radius: 0.75rem;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-base);
+    font-size: var(--step-0);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  h2 {
+    font-size: var(--step-2);
+  }
+
+  h3 {
+    font-size: var(--step-1);
+  }
+
+  p {
+    text-wrap: pretty;
+    max-inline-size: 60ch;
+  }
+
+  a {
+    color: var(--color-accent);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}

@@ -1,0 +1,112 @@
+@layer block {
+  .shopping-list {
+    --flow-space: var(--space-m);
+
+    & + & {
+      border-block-start: 1px solid var(--color-border);
+    }
+
+    .intro {
+      --flow-space: var(--space-xs);
+    }
+
+    .label {
+      font-size: var(--step--1);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .group {
+      max-inline-size: 40rem;
+      padding: 0;
+      border: 0;
+    }
+
+    legend {
+      padding: 0;
+      margin-block-end: var(--space-xs);
+      font-family: var(--font-display);
+      font-size: var(--step-1);
+      font-weight: 700;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--space-s);
+      min-block-size: 3.25rem;
+      padding: var(--space-xs) var(--space-s);
+      border-block-end: 1px solid var(--color-border);
+      cursor: pointer;
+
+      @media (hover: hover) {
+        &:hover {
+          background: var(--color-surface);
+        }
+      }
+    }
+
+    li:first-child .item {
+      border-block-start: 1px solid var(--color-border);
+    }
+
+    input[type="checkbox"] {
+      inline-size: 1.4rem;
+      block-size: 1.4rem;
+      accent-color: var(--color-accent);
+    }
+
+    .name {
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+    }
+
+    .detail {
+      font-size: var(--step--1);
+      font-weight: 400;
+      color: var(--color-text-muted);
+    }
+
+    .buy {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .item:has(input:checked) {
+      color: var(--color-text-muted);
+
+      :is(.title, .buy) {
+        text-decoration: line-through;
+        text-decoration-thickness: 2px;
+      }
+    }
+
+    .actions {
+      --gutter: var(--space-s);
+
+      max-inline-size: 40rem;
+      justify-content: space-between;
+    }
+
+    .button {
+      font: inherit;
+      font-size: var(--step--1);
+      font-weight: 600;
+      padding: 0.4em 1em;
+      border: 1px solid currentColor;
+      border-radius: 99em;
+      background: transparent;
+      color: var(--color-accent);
+      cursor: pointer;
+
+      &[hidden] {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@layer composition {
+  .wrapper {
+    inline-size: min(100% - 2 * var(--space-s), 72rem);
+    margin-inline: auto;
+  }
+
+  .flow > * + * {
+    margin-block-start: var(--flow-space, 1em);
+  }
+
+  .region {
+    padding-block: var(--region-space, var(--space-l));
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min, 18rem), 100%), 1fr));
+    gap: var(--gutter, var(--space-m));
+  }
+
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gutter, var(--space-xs));
+  }
+}

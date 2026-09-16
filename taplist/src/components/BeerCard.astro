@@ -1,0 +1,60 @@
+---
+import type { Beer } from "../lib/brewfather";
+import { beerColor } from "../lib/color";
+import { site } from "../config";
+
+interface Props {
+  beer: Beer;
+}
+
+const { beer } = Astro.props;
+const color = beerColor(beer.color);
+const label = beer.tap != null ? `Tap ${beer.tap}` : site.showBatchNumber ? `Batch #${beer.batchNo}` : null;
+const dateFormat = new Intl.DateTimeFormat("en-CA", { month: "short", day: "numeric", year: "numeric" });
+
+const isComingSoon = beer.status !== "Completed";
+const statusLabel = { Completed: "On tap", Conditioning: "Conditioning", Fermenting: "Fermenting" }[beer.status];
+
+// Kegged date when we have it; otherwise brew date for beers still in progress.
+const milestone = beer.packagedOn
+  ? { verb: "Kegged", date: beer.packagedOn }
+  : isComingSoon && beer.brewedOn
+    ? { verb: "Brewed", date: beer.brewedOn }
+    : null;
+---
+
+<article
+  class="beer-card"
+  data-status={beer.status.toLowerCase()}
+  style={color ? `--beer-color: ${color}` : undefined}
+>
+  <div class="glass" aria-hidden="true"></div>
+  <div class="flow">
+    {isComingSoon && <p class="status">{statusLabel}</p>}
+    {label && <p class="label">{label}</p>}
+    <h3>{beer.name}</h3>
+    {beer.style && <p class="style">{beer.style}</p>}
+    {(beer.abv || beer.ibu) && (
+      <dl class="stats">
+        {beer.abv && (
+          <div>
+            <dt>ABV</dt>
+            <dd>{beer.abv.toFixed(1)}%</dd>
+          </div>
+        )}
+        {beer.ibu && (
+          <div>
+            <dt>IBU</dt>
+            <dd>{Math.round(beer.ibu)}</dd>
+          </div>
+        )}
+      </dl>
+    )}
+    {beer.description && <p>{beer.description}</p>}
+    {milestone && (
+      <p class="text-muted text-step--1">
+        {milestone.verb} <time datetime={milestone.date.toISOString()}>{dateFormat.format(milestone.date)}</time>
+      </p>
+    )}
+  </div>
+</article>

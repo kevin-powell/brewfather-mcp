@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "sample-12",
+    "batchNo": 12,
+    "name": "Batch",
+    "status": "Completed",
+    "recipe": { "name": "Harbour Fog", "style": { "name": "Hazy IPA" }, "abv": 6.4, "ibu": 35, "color": 5 },
+    "measuredAbv": 6.6,
+    "bottlingDate": 1756684800000
+  },
+  {
+    "_id": "sample-14",
+    "batchNo": 14,
+    "name": "Batch",
+    "status": "Completed",
+    "recipe": { "name": "Fundy Brown", "style": { "name": "American Brown Ale" }, "abv": 5.2, "ibu": 28, "color": 20 },
+    "measuredAbv": 5.1,
+    "tasteNotes": "Toasty, a little chocolate, easy drinking.",
+    "bottlingDate": 1757289600000
+  },
+  {
+    "_id": "sample-15",
+    "batchNo": 15,
+    "name": "Batch",
+    "status": "Completed",
+    "recipe": { "name": "Quiet Lager", "style": { "name": "German Pils" }, "abv": 4.8, "ibu": 38, "color": 3 }
+  },
+  {
+    "_id": "sample-16",
+    "batchNo": 16,
+    "name": "Batch",
+    "status": "Conditioning",
+    "bottlingDate": 1757721600000,
+    "recipe": { "name": "Night Shift", "style": { "name": "Oatmeal Stout" }, "abv": 5.8, "ibu": 32, "color": 38 }
+  },
+  {
+    "_id": "sample-17",
+    "batchNo": 17,
+    "name": "Batch",
+    "status": "Fermenting",
+    "brewDate": 1757462400000,
+    "recipe": { "name": "Tidewater Saison", "style": { "name": "Saison" }, "abv": 6.2, "ibu": 26, "color": 6 }
+  }
+]

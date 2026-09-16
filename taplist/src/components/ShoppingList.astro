@@ -1,0 +1,130 @@
+---
+import type { ShoppingList } from "../lib/shopping";
+import { groupItems } from "../lib/shopping";
+
+interface Props {
+  list: ShoppingList;
+}
+
+const { list } = Astro.props;
+const groups = groupItems(list.items);
+const headingId = `list-${list.id}`;
+
+const formatDate = (iso: string) =>
+  new Intl.DateTimeFormat("en-CA", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" }).format(
+    new Date(`${iso}T00:00:00Z`),
+  );
+
+const details = [list.style, list.batchSize].filter(Boolean).join(" · ");
+---
+
+<section class="shopping-list region flow" aria-labelledby={headingId} data-shopping-list>
+  <header class="intro flow">
+    {list.brewDay && <p class="label">Brew day {formatDate(list.brewDay)}</p>}
+    <h2 id={headingId}>{list.recipe}</h2>
+    {details && <p class="text-muted">{details}</p>}
+    {list.notes && <p>{list.notes}</p>}
+  </header>
+
+  {
+    groups.map(([category, items]) => (
+      <fieldset class="group">
+        <legend>{category}</legend>
+        <ul role="list">
+          {items.map((item) => (
+            <li>
+              <label class="item">
+                <input type="checkbox" data-key={`${list.id}|${item.category}|${item.name}|${item.buy}`} />
+                <span class="name">
+                  <span class="title">{item.name}</span>
+                  {(item.need || item.have || item.note) && (
+                    <span class="detail">
+                      {[item.need && `need ${item.need}`, item.have && `have ${item.have}`, item.note]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </span>
+                  )}
+                </span>
+                <span class="buy">{item.buy}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </fieldset>
+    ))
+  }
+
+  <div class="actions cluster">
+    <p class="progress text-muted" aria-live="polite" data-progress>
+      {list.items.length} {list.items.length === 1 ? "item" : "items"}
+    </p>
+    <button type="button" class="button" data-reset hidden>Clear ticks</button>
+  </div>
+</section>
+
+<script>
+  // Ticks are saved in this browser only. Keys include the amount,
+  // so a regenerated list with different quantities starts fresh.
+  const STORAGE_KEY = "taplist:shopping-ticks";
+
+  const load = (): Set<string> => {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]"));
+    } catch {
+      return new Set();
+    }
+  };
+
+  const save = (ticks: Set<string>) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...ticks]));
+    } catch {
+      // Storage unavailable (private mode etc.): ticks just won't persist.
+    }
+  };
+
+  const ticks = load();
+  const lists = document.querySelectorAll<HTMLElement>("[data-shopping-list]");
+  const allKeys = new Set<string>();
+
+  const update = (list: HTMLElement) => {
+    const boxes = [...list.querySelectorAll<HTMLInputElement>("input[data-key]")];
+    const done = boxes.filter((box) => box.checked).length;
+    const progress = list.querySelector("[data-progress]");
+    const reset = list.querySelector<HTMLButtonElement>("[data-reset]");
+
+    if (progress) progress.textContent = done ? `${done} of ${boxes.length} in the basket` : `${boxes.length} items`;
+    if (reset) reset.hidden = done === 0;
+  };
+
+  lists.forEach((list) => {
+    const boxes = list.querySelectorAll<HTMLInputElement>("input[data-key]");
+
+    boxes.forEach((box) => {
+      const key = box.dataset.key!;
+      allKeys.add(key);
+      box.checked = ticks.has(key);
+
+      box.addEventListener("change", () => {
+        box.checked ? ticks.add(key) : ticks.delete(key);
+        save(ticks);
+        update(list);
+      });
+    });
+
+    list.querySelector("[data-reset]")?.addEventListener("click", () => {
+      boxes.forEach((box) => {
+        box.checked = false;
+        ticks.delete(box.dataset.key!);
+      });
+      save(ticks);
+      update(list);
+    });
+
+    update(list);
+  });
+
+  // Forget ticks for items that are no longer on any list.
+  for (const key of ticks) if (!allKeys.has(key)) ticks.delete(key);
+  save(ticks);
+</script>

@@ -1,0 +1,35 @@
+---
+// Unlisted: not linked from the tap list and marked noindex.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ShoppingList from "../components/ShoppingList.astro";
+import { getShoppingLists } from "../lib/shopping";
+
+const lists = getShoppingLists();
+---
+
+<BaseLayout title="Shopping list" description="Ingredients to pick up for upcoming brews." noindex>
+  <header class="site-header region">
+    <div class="wrapper flow">
+      <h1>Shopping list</h1>
+      <p>What to pick up for the next brew day.</p>
+    </div>
+  </header>
+
+  <main class="wrapper">
+    {
+      lists.length > 0 ? (
+        lists.map((list) => <ShoppingList list={list} />)
+      ) : (
+        <div class="region flow">
+          <p>Nothing to buy right now.</p>
+        </div>
+      )
+    }
+  </main>
+
+  <footer class="site-footer region">
+    <div class="wrapper">
+      <p><a href="/">See what's on tap</a></p>
+    </div>
+  </footer>
+</BaseLayout>

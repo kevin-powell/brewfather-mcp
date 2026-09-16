@@ -1,0 +1,147 @@
+@layer block {
+  .beer-card {
+    --flow-space: var(--space-xs);
+    --beer-color: #d9a441;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-m);
+    align-items: start;
+    block-size: 100%;
+    padding: var(--space-m);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+
+    .glass {
+      inline-size: 3.5rem;
+      aspect-ratio: 3 / 5;
+      background:
+        linear-gradient(to bottom, #fffdf5 0 18%, transparent 18%),
+        linear-gradient(to right, rgb(255 255 255 / 0.25), transparent 40%),
+        var(--beer-color);
+      clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
+      border-radius: 0.2rem;
+    }
+
+    .label {
+      font-size: var(--step--1);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .status {
+      --status-color: var(--color-conditioning);
+
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      padding: 0.05em 0.6em;
+      border: 1px solid var(--status-color);
+      border-radius: 99em;
+      color: var(--status-color);
+      font-size: var(--step--1);
+      font-weight: 600;
+
+      &::before {
+        content: "";
+        inline-size: 0.5em;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: currentColor;
+      }
+    }
+
+    .style {
+      color: var(--color-text-muted);
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2xs) var(--space-m);
+
+      div {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      dt {
+        font-size: var(--step--1);
+        color: var(--color-text-muted);
+      }
+
+      dd {
+        font-size: var(--step-1);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@layer exception {
+  .beer-card:is([data-status="conditioning"], [data-status="fermenting"]) {
+    border-style: dashed;
+    background: transparent;
+  }
+
+  /* Conditioning: nearly there, beer settled and clearing. */
+  .beer-card[data-status="conditioning"] .glass {
+    opacity: 0.7;
+  }
+
+  /* Fermenting: hazy, thick krausen, bubbles on the go. */
+  .beer-card[data-status="fermenting"] {
+    .status {
+      --status-color: var(--color-fermenting);
+
+      &::before {
+        animation: beer-card-pulse 1.6s ease-in-out infinite;
+      }
+    }
+
+    .glass {
+      position: relative;
+      opacity: 0.8;
+      background:
+        linear-gradient(to bottom, #f4ead0 0 28%, transparent 28%),
+        linear-gradient(rgb(255 255 255 / 0.25)),
+        var(--beer-color);
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 28% 0 0;
+        background-image:
+          radial-gradient(circle, rgb(255 255 255 / 0.8) 0 1.5px, transparent 2px),
+          radial-gradient(circle, rgb(255 255 255 / 0.6) 0 1px, transparent 1.5px);
+        background-size: 14px 18px, 10px 12px;
+        background-position: 3px 0, 9px 6px;
+        animation: beer-card-bubbles 2.4s linear infinite;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .beer-card[data-status="fermenting"] .status::before,
+    .beer-card[data-status="fermenting"] .glass::after {
+      animation: none;
+    }
+  }
+}
+
+@keyframes beer-card-bubbles {
+  to {
+    background-position: 3px -18px, 9px -6px;
+  }
+}
+
+@keyframes beer-card-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}

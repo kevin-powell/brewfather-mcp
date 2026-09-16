@@ -1,0 +1,7 @@
+# Set "Base directory" to `taplist` when you import the repo into Netlify.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

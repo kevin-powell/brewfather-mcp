@@ -88,8 +88,8 @@ class YeastDetail(Yeast, VersionedModel):
     lot_number: str | None = Field(alias="lotNumber", default=None)
     
     # Performance characteristics
-    min_attenuation: int | None = Field(alias="minAttenuation", default=None)
-    max_attenuation: int | None = Field(alias="maxAttenuation", default=None)
+    min_attenuation: float | None = Field(alias="minAttenuation", default=None)
+    max_attenuation: float | None = Field(alias="maxAttenuation", default=None)
     min_temp: float | None = Field(alias="minTemp", default=None)
     max_temp: float | None = Field(alias="maxTemp", default=None)
     max_abv: int | None = Field(alias="maxAbv", default=None)
@@ -142,8 +142,8 @@ class RecipeYeast(YeastBase):
     description: str | None = None
     
     # Performance characteristics
-    min_attenuation: int | None = Field(alias="minAttenuation", default=None)
-    max_attenuation: int | None = Field(alias="maxAttenuation", default=None)
+    min_attenuation: float | None = Field(alias="minAttenuation", default=None)
+    max_attenuation: float | None = Field(alias="maxAttenuation", default=None)
     min_temp: float | None = Field(alias="minTemp", default=None)
     max_temp: float | None = Field(alias="maxTemp", default=None)
     max_abv: int | None = Field(alias="maxAbv", default=None)

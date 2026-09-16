@@ -1,0 +1,53 @@
+{
+  "lists": [
+    {
+      "id": "citra-forward-neipa-2026-09",
+      "recipe": "Citra-Forward NEIPA",
+      "style": "Hazy IPA (NEIPA)",
+      "batchSize": "25 L",
+      "createdAt": "2026-09-16",
+      "notes": "Based on Another NEIPA. 2-row, Citra/Mosaic/Galaxy and water salts are already in stock.",
+      "items": [
+        {
+          "category": "Grain",
+          "name": "White Wheat Malt",
+          "buy": "500 g",
+          "need": "500 g",
+          "have": "128 g",
+          "note": "Buying the full amount"
+        },
+        {
+          "category": "Grain",
+          "name": "Flaked Oats",
+          "buy": "500 g",
+          "need": "500 g",
+          "have": "0 g"
+        },
+        {
+          "category": "Grain",
+          "name": "Flaked Barley",
+          "buy": "500 g",
+          "need": "500 g",
+          "have": "1 kg",
+          "note": "Buying the full amount"
+        },
+        {
+          "category": "Grain",
+          "name": "Honey Malt",
+          "buy": "200 g",
+          "need": "175 g",
+          "have": "225 g",
+          "note": "Buying the full amount, rounded up to 200 g"
+        },
+        {
+          "category": "Yeast",
+          "name": "Escarpment Vermont Ale",
+          "buy": "1 pack",
+          "need": "1 pack",
+          "have": "0 packs",
+          "note": "Making a starter (OG ~1.061)"
+        }
+      ]
+    }
+  ]
+}

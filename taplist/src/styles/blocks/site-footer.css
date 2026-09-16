@@ -1,0 +1,21 @@
+@layer block {
+  .site-footer {
+    --region-space: var(--space-l);
+
+    border-block-start: 1px solid var(--color-border);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+}
+
+@layer exception {
+  .sample-notice {
+    padding: var(--space-xs) var(--space-s);
+    background: #ffe08a;
+    color: #3a2a00;
+    text-align: center;
+    max-inline-size: none;
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+}

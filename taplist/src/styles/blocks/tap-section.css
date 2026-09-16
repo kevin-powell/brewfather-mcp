@@ -1,0 +1,21 @@
+@layer block {
+  .tap-section {
+    --flow-space: var(--space-m);
+
+    .heading {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-s);
+    }
+
+    .count {
+      font-family: var(--font-base);
+      font-size: var(--step--1);
+      font-weight: 600;
+      padding: 0.1em 0.6em;
+      border-radius: 99em;
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+  }
+}

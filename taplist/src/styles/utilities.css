@@ -1,0 +1,19 @@
+@layer utility {
+  .visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    block-size: 1px;
+    inline-size: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .text-step--1 {
+    font-size: var(--step--1);
+  }
+}

@@ -1,0 +1,33 @@
+---
+import type { Beer } from "../lib/brewfather";
+import BeerCard from "./BeerCard.astro";
+
+interface Props {
+  title: string;
+  beers: Beer[];
+  empty: string;
+}
+
+const { title, beers, empty } = Astro.props;
+const id = title.toLowerCase().replace(/\W+/g, "-");
+---
+
+<section class="tap-section region flow" aria-labelledby={id}>
+  <h2 class="heading" id={id}>
+    {title}
+    {beers.length > 0 && <span class="count">{beers.length}</span>}
+  </h2>
+  {
+    beers.length > 0 ? (
+      <ul class="grid" role="list">
+        {beers.map((beer) => (
+          <li>
+            <BeerCard beer={beer} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-muted">{empty}</p>
+    )
+  }
+</section>
