@@ -48,6 +48,67 @@
           "note": "Making a starter (OG ~1.061)"
         }
       ]
+    },
+    {
+      "id": "classic-apa-2026-09",
+      "recipe": "Classic APA",
+      "style": "American Pale Ale",
+      "batchSize": "23.5 L",
+      "createdAt": "2026-09-16",
+      "notes": "Brewing before the Citra-Forward NEIPA. 2-row (5.1 kg) and water salts already in stock; 2-row covers both lists. Everything else bought fresh.",
+      "items": [
+        {
+          "category": "Grain",
+          "name": "Munich Malt",
+          "buy": "800 g",
+          "need": "750 g",
+          "have": "0 g",
+          "note": "3 kg in Brewfather, but buying fresh"
+        },
+        {
+          "category": "Grain",
+          "name": "Crystal 40L",
+          "buy": "300 g",
+          "need": "300 g",
+          "have": "0 g"
+        },
+        {
+          "category": "Hops",
+          "name": "Cascade",
+          "buy": "100 g",
+          "need": "100 g",
+          "have": "0 g"
+        },
+        {
+          "category": "Hops",
+          "name": "Centennial",
+          "buy": "100 g",
+          "need": "100 g",
+          "have": "0 g",
+          "note": "Fresh Amarillo can replace the late Centennial additions"
+        },
+        {
+          "category": "Yeast",
+          "name": "Mangrove Jack's M44 US West Coast",
+          "buy": "1 pack",
+          "need": "1 pack",
+          "have": "0 packs"
+        },
+        {
+          "category": "Water & salts",
+          "name": "Lactic Acid",
+          "buy": "1 bottle",
+          "need": "~2 ml",
+          "have": "0 ml"
+        },
+        {
+          "category": "Other",
+          "name": "Gelatin",
+          "buy": "1 pack",
+          "need": "1 tsp",
+          "have": "0"
+        }
+      ]
     }
   ]
 }
