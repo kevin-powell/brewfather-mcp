@@ -1,21 +1,6 @@
 import sample from "../data/sample-batches.json";
 import tapNotes from "../data/tap-notes.json";
-
-const API = "https://api.brewfather.app/v2";
-
-// Extra fields to ask for on the batch list endpoint (it only returns the basics by default).
-const INCLUDE = [
-  "recipe.style",
-  "recipe.abv",
-  "recipe.ibu",
-  "recipe.color",
-  "recipe.teaser",
-  "measuredAbv",
-  "estimatedIbu",
-  "estimatedColor",
-  "bottlingDate",
-  "tasteNotes",
-].join(",");
+import { basicAuth, fetchTapBatches } from "./brewfather-query.mjs";
 
 export type TapStatus = "Completed" | "Conditioning" | "Fermenting";
 
@@ -66,32 +51,6 @@ function toBeer(raw: RawBatch): Beer | null {
   };
 }
 
-async function fetchStatus(status: TapStatus, auth: string): Promise<RawBatch[]> {
-  const batches: RawBatch[] = [];
-  let startAfter: string | undefined;
-
-  // The API caps pages at 50; keep paging until we've got everything.
-  do {
-    const params = new URLSearchParams({ status, include: INCLUDE, limit: "50" });
-    if (startAfter) params.set("start_after", startAfter);
-
-    const res = await fetch(`${API}/batches?${params}`, {
-      headers: { Authorization: `Basic ${auth}` },
-    });
-    if (!res.ok) {
-      throw new Error(`Brewfather API ${res.status} ${res.statusText} fetching ${status} batches`);
-    }
-
-    const page: RawBatch[] = await res.json();
-    batches.push(...page);
-    startAfter = page.length === 50 ? page.at(-1)?._id : undefined;
-  } while (startAfter);
-
-  return batches;
-}
-
-const STATUSES: TapStatus[] = ["Completed", "Conditioning", "Fermenting"];
-
 // Coming soon: closest to ready first.
 const READINESS: Record<TapStatus, number> = { Completed: 0, Conditioning: 1, Fermenting: 2 };
 
@@ -111,9 +70,7 @@ export async function getTapList() {
   let usingSample = false;
 
   if (userId && apiKey) {
-    const auth = Buffer.from(`${userId}:${apiKey}`).toString("base64");
-    const results = await Promise.all(STATUSES.map((status) => fetchStatus(status, auth)));
-    raw = results.flat();
+    raw = await fetchTapBatches(basicAuth(userId, apiKey));
   } else if (process.env.NETLIFY) {
     // Never publish sample beers to the live site.
     throw new Error("Missing BREWFATHER_API_USER_ID / BREWFATHER_API_KEY in Netlify environment variables.");

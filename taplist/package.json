@@ -7,10 +7,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "inspect": "node --env-file-if-exists=.env scripts/inspect-batches.mjs"
+    "inspect": "node --env-file-if-exists=.env scripts/inspect-batches.mjs",
+    "hash": "node --env-file-if-exists=.env scripts/batch-hash.mjs"
   },
   "dependencies": {
-    "@netlify/functions": "^6.0.0",
     "astro": "^7.3.2"
   }
 }

@@ -1,0 +1,87 @@
+# Rebuilds the tap list on Netlify only when Brewfather data has changed.
+# Runs on GitHub (free for public repos), so quiet hours cost no Netlify credits.
+#
+# Setup (repo Settings → Secrets and variables → Actions → New repository secret):
+#   BREWFATHER_API_USER_ID, BREWFATHER_API_KEY  – read-only Brewfather key is enough
+#   NETLIFY_BUILD_HOOK_URL                      – Netlify: Site configuration → Build & deploy → Build hooks
+name: Tap list refresh
+
+on:
+  schedule:
+    - cron: "17 * * * *" # hourly
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Rebuild even if nothing changed
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: taplist-refresh
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: taplist
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fingerprint Brewfather batches
+        id: current
+        working-directory: taplist
+        env:
+          BREWFATHER_API_USER_ID: ${{ secrets.BREWFATHER_API_USER_ID }}
+          BREWFATHER_API_KEY: ${{ secrets.BREWFATHER_API_KEY }}
+        run: |
+          hash="$(node scripts/batch-hash.mjs)"
+          echo "hash=$hash" >> "$GITHUB_OUTPUT"
+
+      - name: Restore last fingerprint
+        uses: actions/cache/restore@v4
+        with:
+          path: .taplist-hash
+          key: taplist-hash-${{ github.run_id }}
+          restore-keys: taplist-hash-
+
+      - name: Compare
+        id: compare
+        env:
+          CURRENT: ${{ steps.current.outputs.hash }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          last="$(cat .taplist-hash 2>/dev/null || true)"
+          if [ "$FORCE" = "true" ] || [ "$last" != "$CURRENT" ]; then
+            echo "Brewfather data changed (or forced), rebuilding."
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No change since last check, skipping build."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Trigger Netlify build
+        if: steps.compare.outputs.changed == 'true'
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+        run: curl -fsS -X POST -d '{}' "$HOOK?trigger_title=Brewfather+data+changed"
+
+      - name: Remember fingerprint
+        if: steps.compare.outputs.changed == 'true'
+        env:
+          CURRENT: ${{ steps.current.outputs.hash }}
+        run: echo "$CURRENT" > .taplist-hash
+
+      - name: Save fingerprint
+        if: steps.compare.outputs.changed == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .taplist-hash
+          key: taplist-hash-${{ github.run_id }}

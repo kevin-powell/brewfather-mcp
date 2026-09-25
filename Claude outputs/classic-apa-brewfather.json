@@ -1,0 +1,423 @@
+{
+  "name": "Classic APA",
+  "author": "Kevin Powell",
+  "type": "All Grain",
+  "_type": "recipe",
+  "style": {
+    "name": "American Pale Ale",
+    "category": "Pale American Ale",
+    "styleGuide": "BJCP 2015",
+    "type": "Ale",
+    "ogMin": 1.045,
+    "ogMax": 1.06,
+    "fgMin": 1.01,
+    "fgMax": 1.015,
+    "ibuMin": 30,
+    "ibuMax": 50,
+    "colorMin": 5,
+    "colorMax": 10,
+    "abvMin": 4.5,
+    "abvMax": 6.2,
+    "carbMin": 2.3,
+    "carbMax": 2.8
+  },
+  "batchSize": 23.5,
+  "boilTime": 60,
+  "efficiency": 65,
+  "notes": "Classic, clear American pale ale in the Sierra Nevada Pale Ale mould. Target OG ~1.052, FG ~1.011, ~5.3%, ~38 IBU, SO4:Cl ~170:60. Apply the current equipment profile after import and check OG lands ~1.052; adjust 2-row if not. Update hop alpha acids to the bags you buy.",
+  "fermentables": [
+    {
+      "name": "Pale Malt (2-Row)",
+      "type": "Grain",
+      "grainCategory": "Base",
+      "color": 2,
+      "potential": 1.037,
+      "potentialPercentage": 80.4,
+      "amount": 5.1,
+      "notFermentable": false,
+      "_id": "f0",
+      "origin": "",
+      "supplier": "",
+      "attenuation": null,
+      "moisture": null,
+      "diastaticPower": null,
+      "addAfterBoil": false,
+      "hidden": false
+    },
+    {
+      "name": "Munich Malt",
+      "type": "Grain",
+      "grainCategory": "Base (Munich)",
+      "color": 9,
+      "potential": 1.035,
+      "potentialPercentage": 76.1,
+      "amount": 0.75,
+      "notFermentable": false,
+      "_id": "f1",
+      "origin": "",
+      "supplier": "",
+      "attenuation": null,
+      "moisture": null,
+      "diastaticPower": null,
+      "addAfterBoil": false,
+      "hidden": false
+    },
+    {
+      "name": "Caramel/Crystal Malt 40L",
+      "type": "Grain",
+      "grainCategory": "Crystal/Caramel",
+      "color": 40,
+      "potential": 1.034,
+      "potentialPercentage": 73.9,
+      "amount": 0.3,
+      "notFermentable": false,
+      "_id": "f2",
+      "origin": "",
+      "supplier": "",
+      "attenuation": null,
+      "moisture": null,
+      "diastaticPower": null,
+      "addAfterBoil": false,
+      "hidden": false
+    }
+  ],
+  "hops": [
+    {
+      "name": "Centennial",
+      "type": "Pellet",
+      "usage": "Bittering",
+      "alpha": 10,
+      "amount": 20,
+      "use": "Boil",
+      "time": 60,
+      "_id": "h0",
+      "origin": "US",
+      "hidden": false
+    },
+    {
+      "name": "Centennial",
+      "type": "Pellet",
+      "usage": "Both",
+      "alpha": 10,
+      "amount": 15,
+      "use": "Boil",
+      "time": 10,
+      "_id": "h1",
+      "origin": "US",
+      "hidden": false
+    },
+    {
+      "name": "Cascade",
+      "type": "Pellet",
+      "usage": "Both",
+      "alpha": 6.5,
+      "amount": 25,
+      "use": "Boil",
+      "time": 10,
+      "_id": "h2",
+      "origin": "US",
+      "hidden": false
+    },
+    {
+      "name": "Cascade",
+      "type": "Pellet",
+      "usage": "Aroma",
+      "alpha": 6.5,
+      "amount": 50,
+      "use": "Aroma",
+      "time": 20,
+      "temp": 80,
+      "_id": "h3",
+      "origin": "US",
+      "hidden": false
+    },
+    {
+      "name": "Centennial",
+      "type": "Pellet",
+      "usage": "Aroma",
+      "alpha": 10,
+      "amount": 35,
+      "use": "Aroma",
+      "time": 20,
+      "temp": 80,
+      "_id": "h4",
+      "origin": "US",
+      "hidden": false
+    },
+    {
+      "name": "Cascade",
+      "type": "Pellet",
+      "usage": "Aroma",
+      "alpha": 6.5,
+      "amount": 25,
+      "use": "Dry Hop",
+      "day": 5,
+      "time": 3,
+      "_id": "h5",
+      "origin": "US",
+      "hidden": false
+    },
+    {
+      "name": "Centennial",
+      "type": "Pellet",
+      "usage": "Aroma",
+      "alpha": 10,
+      "amount": 30,
+      "use": "Dry Hop",
+      "day": 5,
+      "time": 3,
+      "_id": "h6",
+      "origin": "US",
+      "hidden": false
+    }
+  ],
+  "yeasts": [
+    {
+      "name": "M44 US West Coast",
+      "laboratory": "Mangrove Jack's",
+      "productId": "M44",
+      "type": "Ale",
+      "form": "Dry",
+      "attenuation": 79,
+      "minTemp": 18,
+      "maxTemp": 23,
+      "flocculation": "High",
+      "amount": 1,
+      "unit": "pkg",
+      "_id": "y0",
+      "hidden": false
+    }
+  ],
+  "miscs": [
+    {
+      "name": "Gypsum (CaSO4)",
+      "type": "Water Agent",
+      "use": "Mash",
+      "amount": 8,
+      "unit": "g",
+      "_id": "m0",
+      "hidden": false
+    },
+    {
+      "name": "Calcium Chloride (CaCl2)",
+      "type": "Water Agent",
+      "use": "Mash",
+      "amount": 4,
+      "unit": "g",
+      "_id": "m1",
+      "hidden": false
+    },
+    {
+      "name": "Epsom Salt (MgSO4)",
+      "type": "Water Agent",
+      "use": "Mash",
+      "amount": 2,
+      "unit": "g",
+      "_id": "m2",
+      "hidden": false
+    },
+    {
+      "name": "Lactic Acid",
+      "type": "Water Agent",
+      "use": "Mash",
+      "amount": 2,
+      "unit": "ml",
+      "_id": "m3",
+      "hidden": false
+    },
+    {
+      "name": "Gelatin",
+      "type": "Fining",
+      "use": "Secondary",
+      "amount": 1,
+      "unit": "tsp",
+      "time": 8,
+      "timeIsDays": true,
+      "_id": "m4",
+      "hidden": false
+    }
+  ],
+  "mash": {
+    "name": "Single infusion 66°C",
+    "steps": [
+      {
+        "name": "Saccharification",
+        "type": "Temperature",
+        "stepTemp": 66,
+        "stepTime": 60
+      }
+    ]
+  },
+  "fermentation": {
+    "name": "Classic APA",
+    "steps": [
+      {
+        "type": "Primary",
+        "stepTemp": 18,
+        "stepTime": 4
+      },
+      {
+        "type": "Primary",
+        "stepTemp": 20,
+        "stepTime": 4
+      },
+      {
+        "type": "Cold Crash",
+        "stepTemp": 2,
+        "stepTime": 3
+      }
+    ]
+  },
+  "equipment": {
+    "name": "15 gal BIAB - 7 gal fermentor",
+    "_id": "default",
+    "batchSize": 23.5,
+    "boilSize": 28.5,
+    "boilTime": 60,
+    "efficiency": 65,
+    "brewhouseEfficiency": 65,
+    "mashEfficiency": 72,
+    "efficiencyType": "brewhouse",
+    "calcMashEfficiency": true,
+    "bottlingVolume": 21,
+    "fermenterVolume": 23.5,
+    "trubChillerLoss": 2,
+    "postBoilKettleVol": 25.5,
+    "boilOffPerHr": 3,
+    "evaporationRate": 10.5,
+    "mashTunDeadSpace": 0,
+    "mashWaterMax": 0,
+    "mashWaterVolumeLimitEnabled": false,
+    "spargeTemperature": 76,
+    "grainTemperature": 20,
+    "ambientTemperature": 20,
+    "grainAbsorptionRate": 0.8,
+    "hopUtilization": 100,
+    "calcAromaHopUtilization": true,
+    "aromaHopUtilization": 0.2,
+    "hopstandTemperature": 80,
+    "fermenterLoss": 1,
+    "fermenterLossEstimate": 1,
+    "calcBoilVolume": true,
+    "calcStrikeWaterTemp": true,
+    "waterGrainRatio": 3,
+    "mashWaterFormula": "",
+    "spargeWaterFormula": ""
+  },
+  "mashEfficiency": 72,
+  "boilSize": 28.5,
+  "ibuFormula": "tinseth",
+  "fgFormula": "normal",
+  "og": 1.052,
+  "fg": 1.011,
+  "ibu": 38,
+  "color": 6,
+  "abv": 5.3,
+  "carbonation": 2.4,
+  "hopStandMinutes": 20,
+  "version": "2.10.0",
+  "_version": "2.10.0",
+  "water": {
+    "source": {
+      "name": "RO",
+      "calcium": 1,
+      "magnesium": 0,
+      "sodium": 8,
+      "chloride": 4,
+      "sulfate": 1,
+      "bicarbonate": 16
+    },
+    "target": {
+      "name": "Classic APA",
+      "calcium": 95,
+      "magnesium": 6,
+      "sodium": 8,
+      "chloride": 62,
+      "sulfate": 169,
+      "bicarbonate": 16
+    },
+    "mash": {
+      "name": "Classic APA",
+      "calcium": 95,
+      "magnesium": 6,
+      "sodium": 8,
+      "chloride": 62,
+      "sulfate": 169,
+      "bicarbonate": 16
+    },
+    "sparge": {
+      "name": "RO",
+      "calcium": 1,
+      "magnesium": 0,
+      "sodium": 8,
+      "chloride": 4,
+      "sulfate": 1,
+      "bicarbonate": 16
+    },
+    "total": {
+      "name": "Classic APA",
+      "calcium": 95,
+      "magnesium": 6,
+      "sodium": 8,
+      "chloride": 62,
+      "sulfate": 169,
+      "bicarbonate": 16
+    },
+    "mashAdjustments": {
+      "calcium": 0,
+      "magnesium": 0,
+      "sodium": 0,
+      "chloride": 0,
+      "sulfate": 0,
+      "bicarbonate": 0,
+      "volume": 31,
+      "calciumChloride": 4,
+      "calciumSulfate": 8,
+      "magnesiumSulfate": 2,
+      "sodiumChloride": 0,
+      "sodiumBicarbonate": 0
+    },
+    "spargeAdjustments": {
+      "calcium": 0,
+      "magnesium": 0,
+      "sodium": 0,
+      "chloride": 0,
+      "sulfate": 0,
+      "bicarbonate": 0,
+      "volume": 0,
+      "calciumChloride": 0,
+      "calciumSulfate": 0,
+      "magnesiumSulfate": 0,
+      "sodiumChloride": 0,
+      "sodiumBicarbonate": 0
+    },
+    "totalAdjustments": {
+      "calcium": 0,
+      "magnesium": 0,
+      "sodium": 0,
+      "chloride": 0,
+      "sulfate": 0,
+      "bicarbonate": 0,
+      "volume": 31,
+      "calciumChloride": 4,
+      "calciumSulfate": 8,
+      "magnesiumSulfate": 2,
+      "sodiumChloride": 0,
+      "sodiumBicarbonate": 0
+    },
+    "enableSpargeAdjustments": false,
+    "mashPh": 5.4,
+    "acidPhAdjustment": 0,
+    "spargeAcidPhAdjustment": 0
+  },
+  "boilSteps": [],
+  "data": {},
+  "defaults": {},
+  "nutrition": {},
+  "hidden": false,
+  "public": false,
+  "tags": [],
+  "searchTags": [
+    "pale ale"
+  ]
+}

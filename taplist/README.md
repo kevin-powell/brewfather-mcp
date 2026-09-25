@@ -61,9 +61,10 @@ Beers with a `tap` number are listed first, in tap order. Descriptions fall back
 
 ### Auto-refresh
 
-Brewfather has no webhooks, so `netlify/functions/scheduled-rebuild.mts` triggers a rebuild every 6 hours.
+Brewfather has no webhooks, so `.github/workflows/taplist-refresh.yml` checks for changes every hour on GitHub Actions (free for public repos). It fingerprints the batch data the page shows (`npm run hash`) and only calls the Netlify build hook when that fingerprint changes, so quiet hours use no Netlify credits.
 
-1. **Site configuration → Build & deploy → Build hooks → Add build hook**
-2. Save the URL as the `BUILD_HOOK_URL` environment variable, then redeploy.
+1. Netlify: **Site configuration → Build & deploy → Build hooks → Add build hook**.
+2. GitHub: **Settings → Secrets and variables → Actions**, add `BREWFATHER_API_USER_ID`, `BREWFATHER_API_KEY` and `NETLIFY_BUILD_HOOK_URL`.
+3. GitHub: **Actions** tab, enable workflows for the fork, then run **Tap list refresh** once by hand.
 
-Change the `schedule` in that file if you want it more or less often. To refresh immediately after changing a batch status, trigger a deploy from the Netlify dashboard or `curl -X POST <build hook URL>`.
+Pushes that touch `taplist/` (e.g. shopping lists) still build straight away; Netlify skips pushes that don't change `taplist/`. To force a refresh, run the workflow with **Rebuild even if nothing changed** ticked.
